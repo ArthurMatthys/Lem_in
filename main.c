@@ -6,25 +6,35 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:27:56 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/12 15:13:07 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/14 15:10:33 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int			main(int argc, char **argv)
+t_room		*find_stat(t_room *room, int i)
 {
-	t_room	*room = NULL;
-
-	if (argc != 2)
+	while (room)
 	{
-		ft_printf("Error : unvalid entry");
-		return (0);
+		if (room->stat == i)
+			return (room);
+		room = room->next;
 	}
-	if (!(room = parse(argv[1], room)))
+}
+
+int			main(void)
+{
+	t_room	*start;
+	t_room	*end = NULL;
+
+	if (!(start = parse(end)))
+		return (0);
+	start = find_stat(end, 1);
+	end = find_stat(end, 2);
+	if (!put_len(end))
 	{
-		ft_printf("Error : unvalid entry");
+		ft_printf("Error");
 		return (0);
 	}
 	return (0);

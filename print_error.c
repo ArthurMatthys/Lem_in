@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_putchar_fd.c                                  .::    .:/ .      .::   */
+/*   print_error.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/24 13:31:16 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/14 15:11:51 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/14 08:53:32 by amatthys     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/14 08:55:05 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lem_in.h"
 
-int		ft_putchar_fd(char c, int fd)
+void	*print_error(void)
 {
-	write(fd, &c, 1);
-	return (1);
+	ft_printf("Error\n");
+	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/24 13:26:54 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/25 13:44:16 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/14 15:11:47 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,7 +42,6 @@ void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);
 void				ft_putnbr(int c);
-void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
@@ -69,9 +68,11 @@ int					ft_isascii(int c);
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
+int					ft_putchar_fd(char c, int fd);
 int					is_in(int t, int *tab, size_t len);
 size_t				ft_strlcat(char *dst, const char *src, size_t n);
 size_t				ft_strlen(char *str);
+size_t				ft_tablen(char **tab);
 char				*ft_strcat(char *dest, const char *src);
 char				*ft_strcpy(char *dest, const char *src);
 char				*ft_strdup(const char *s1);

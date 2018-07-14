@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_putchar_fd.c                                  .::    .:/ .      .::   */
+/*   put_len.c                                        .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/24 13:31:16 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/14 15:11:51 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/14 14:20:23 by amatthys     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/14 15:10:53 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lem_in.h"
 
-int		ft_putchar_fd(char c, int fd)
+int			put_len(t_room *end)
 {
-	write(fd, &c, 1);
-	return (1);
+	t_room	*link;
+	int		i;
+
+	i = 0;
+	link = end->links;
+	
 }
+

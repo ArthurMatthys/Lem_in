@@ -6,7 +6,7 @@
 #    By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/06/07 14:26:55 by amatthys     #+#   ##    ##    #+#        #
-#    Updated: 2018/06/25 13:46:40 by amatthys    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/14 08:44:10 by amatthys    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -84,6 +84,7 @@ SRC_NAME = 	ft_addmatrix.c \
 		ft_strstr.c \
 		ft_strsub.c \
 		ft_strtrim.c \
+		ft_tablen.c \
 		ft_tmatrix.c \
 		ft_tolower.c \
 		ft_toupper.c \

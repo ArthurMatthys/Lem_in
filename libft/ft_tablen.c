@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_putchar_fd.c                                  .::    .:/ .      .::   */
+/*   ft_tablen.c                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/24 13:31:16 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/14 15:11:51 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/14 08:42:16 by amatthys     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/14 08:43:30 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_putchar_fd(char c, int fd)
+size_t	ft_tablen(char **tab)
 {
-	write(fd, &c, 1);
-	return (1);
+	size_t i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }
