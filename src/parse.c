@@ -6,12 +6,11 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:16:32 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/18 18:01:11 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/19 16:16:25 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-//#include "../includes/lem_in.h"
 #include "lem_in.h"
 
 t_room			*roomcpy(t_room *room)
@@ -103,11 +102,11 @@ t_room			*create_nest(char **tab, t_room *first, int *stat, int ant)
 	new->x = ft_atoi(tab[1]);
 	new->y = ft_atoi(tab[1]);
 	new->range = (*stat == -2 ? 0 : -1);
-	new->nbr = ant * (*stat == -1 || *stat == -3);
+	new->nbr = (*stat > 0) * ant * ((*stat % 2) - (!(*stat % 2)));
 	new->links = NULL;
 	new->next = first;
 	if (*stat < 0)
-		*stat *= -1;
+		*stat *= -1 * (*stat % 2) - 2 * (!(*stat % 2));
 	return (new);
 }
 
@@ -165,7 +164,7 @@ t_room			*rooms(t_room *first, int ant)
 //			ft_printf("test02\nstat :%d\n", stat);
 			if (stat % 2 == 1 || stat < 0)
 				return (print_error());
-			stat = (!stat ? -1 : -3);
+			stat = (!stat ? -1 : -4);
 		}
 		else if (!ft_strcmp(str, "##end"))
 		{

@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:08:35 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/18 09:16:55 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/19 18:29:48 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,6 +27,12 @@ typedef struct		s_links
 	struct s_links	*links;
 }					t_links;
 
+typedef struct		s_ant
+{
+	int				i;
+	char			*room;
+}					t_ant;
+
 typedef struct		s_room
 {
 	char			*name;
@@ -40,7 +46,10 @@ typedef struct		s_room
 }					t_room;
 
 int					put_len(t_room *init, t_room *end);
+int					remove_access_s(t_room *init);
+t_room				*find_room(t_room *init, char *str);
 t_room				*parse(t_room *room);
+void				moove_ants(t_room *start, t_ant *ant);
 void				*print_error(void);
 
 #endif

@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   print_error.c                                    .::    .:/ .      .::   */
+/*   movement.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/07/14 08:53:32 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/19 08:44:04 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/19 15:37:35 by amatthys     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/19 18:29:26 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	*print_error(void)
+void		moove_ants(t_room *start, t_ant *ant)
 {
-	ft_printf("Error\n");
-	return (NULL);
+	int		i;
+
+	i = 0;
+	while (1)
+	{
+
 }

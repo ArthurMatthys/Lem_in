@@ -6,12 +6,11 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/14 14:20:23 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/18 16:41:37 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/19 08:44:08 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-//#include "../includes/lem_in.h"
 #include "lem_in.h"
 
 t_room		*find_room(t_room *init, char *str)
