@@ -1,36 +1,47 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   ft_strstr.c                                      .::    .:/ .      .::   */
+/*   main.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2017/11/24 13:34:05 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/24 13:34:06 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/12 11:27:56 by amatthys     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/18 16:51:51 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+//#include "../includes/lem_in.h"
+#include "lem_in.h"
 
-char	*ft_strstr(const char *haystack, const char *needle)
+t_room		*find_stat(t_room *room, int i)
 {
-	size_t n;
-	size_t tmp;
-	size_t len2;
+	t_room	*cpy;
 
-	len2 = ft_strlen((char *)needle);
-	n = 0;
-	if (!*needle)
-		return ((char *)haystack);
-	while (haystack[n])
+	cpy = room;
+	while (cpy)
 	{
-		tmp = 0;
-		while (needle[tmp] == haystack[n + tmp] && needle[tmp])
-			tmp++;
-		if (tmp == len2)
-			return ((char *)&haystack[n]);
-		n++;
+		if (cpy->stat == i)
+			return (cpy);
+		cpy = cpy->next;
 	}
 	return (NULL);
+}
+
+int			main(void)
+{
+	t_room	*start;
+	t_room	*end;
+	t_room	*init = NULL;
+
+	if (!(init = parse(init)))
+		return (0);
+	if (!(start = find_stat(init, 1)) || !(end = find_stat(init, 2)))
+		return (0);
+	if (!put_len(init, end))
+	{
+		ft_printf("Error");
+		return (0);
+	}
+	return (0);
 }

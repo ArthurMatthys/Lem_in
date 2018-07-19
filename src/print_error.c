@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   is_in.c                                          .::    .:/ .      .::   */
+/*   print_error.c                                    .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2018/06/25 13:42:13 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/06/25 13:50:10 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Created: 2018/07/14 08:53:32 by amatthys     #+#   ##    ##    #+#       */
+/*   Updated: 2018/07/18 10:57:42 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include "libft.h"
+//#include "../includes/lem_in.h"
+#include "lem_in.h"
 
-int		is_in(int t, int *tab, size_t len)
+void	*print_error(void)
 {
-	size_t	j;
-
-	j = 0;
-	while (j < len)
-	{
-		if (tab[j] == t)
-			return (1);
-		j++;
-	}
-	return (0);
+	ft_printf("Error\n");
+	return (NULL);
 }
