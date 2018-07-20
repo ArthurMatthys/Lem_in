@@ -6,7 +6,7 @@
 #    By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/07/18 10:17:52 by amatthys     #+#   ##    ##    #+#        #
-#    Updated: 2018/07/19 12:00:26 by amatthys    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/20 12:12:55 by amatthys    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -14,7 +14,7 @@
 RELATIVE = .
 
 SRC_PATH = src
-SRC_NAME = print_error.c put_len.c main.c parse.c remove_access.c
+SRC_NAME = print_error.c put_len.c main.c parse.c remove_access.c movement.c
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
 

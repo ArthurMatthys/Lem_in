@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:16:32 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/19 16:16:25 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/20 12:08:02 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -102,11 +102,17 @@ t_room			*create_nest(char **tab, t_room *first, int *stat, int ant)
 	new->x = ft_atoi(tab[1]);
 	new->y = ft_atoi(tab[1]);
 	new->range = (*stat == -2 ? 0 : -1);
-	new->nbr = (*stat > 0) * ant * ((*stat % 2) - (!(*stat % 2)));
+	new->nbr = ant * (*stat % 2);
 	new->links = NULL;
+	if (*stat >= 0)
+		new->stat = 0;
+	else if (*stat >= -2)
+		new->stat = *stat;
+	else
+		new->stat = -1 * (*stat + 2);
 	new->next = first;
 	if (*stat < 0)
-		*stat *= -1 * (*stat % 2) - 2 * (!(*stat % 2));
+		*stat *= -1;
 	return (new);
 }
 

@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:27:56 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/19 18:29:42 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/20 11:27:11 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -33,11 +33,11 @@ t_ant		*create_ant(int nbr, t_room *start)
 
 	tab = (t_ant *)malloc(sizeof(t_ant) * (nbr +1));
 	tab[nbr].room = NULL;
-	tab[nbr].i = -2;
+	tab[nbr].nbr = -2;
 	while (nbr >= 0)
 	{
 		tab[nbr].room = start->name;
-		tab[nbr].i = nbr + 1;
+		tab[nbr].nbr = nbr + 1;
 		nbr--;
 	}
 	return (tab);
@@ -62,6 +62,6 @@ int			main(void)
 	}
 	ant = create_ant(start->nbr, start);
 	remove_access_s(init);
-	moove_ants(start, ant);
+	moove_ants(init, start, ant);
 	return (0);
 }
