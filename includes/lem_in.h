@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:08:35 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/20 11:27:10 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/21 18:05:49 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,7 +45,7 @@ typedef struct		s_room
 	struct s_room	*next;
 }					t_room;
 
-int					put_len(t_room *init, t_room *end);
+int					put_len(t_room *init, t_room *end, int *st);
 int					remove_access_s(t_room *init);
 t_room				*find_room(t_room *init, char *str);
 t_room				*parse(t_room *room);
