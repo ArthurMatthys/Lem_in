@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:27:56 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/21 17:58:18 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/22 10:57:37 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -70,10 +70,12 @@ int			main(void)
 //	ft_printf("test01\n");
 	if (!(init = parse(init)))
 	{
+		free_fd();
 		ft_printf("Error\n");
 		return (0);
 	}
 //	ft_printf("test02\n");
+	free_fd();
 	start = init;
 //	while (start)
 //	{
@@ -104,5 +106,6 @@ int			main(void)
 //	ft_printf("start->nbr : %d\n", start->nbr);
 	moove_ants(init, start, ant);
 	free_all(init);
+	free(ant);
 	return (0);
 }

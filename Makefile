@@ -6,7 +6,7 @@
 #    By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/07/18 10:17:52 by amatthys     #+#   ##    ##    #+#        #
-#    Updated: 2018/07/20 12:12:55 by amatthys    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/22 10:16:06 by amatthys    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -36,7 +36,7 @@ all : $(NAME)
 LIB :
 		make -C ft_printf/
 
-$(NAME) : $(OBJ) $(LIB) LIB
+$(NAME) : $(OBJ) LIB
 		$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L./ft_printf -lftprintf $(INC_LIB)
 
 %.o: %.c

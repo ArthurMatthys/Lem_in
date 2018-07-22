@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/19 08:44:48 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/19 15:08:50 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/22 09:38:19 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,14 +45,14 @@ int		remove_access(t_room *init, t_room *room)
 	int			i;
 
 	link = room->links;
-	if (room->stat == -1 || !link)
+	if (!link)
 		return (1);
 	i = room->range;
 	str = room->name;
 	while (link)
 	{
 		chr = find_room(init, link->room);
-		if (chr->range < i && chr->range >= 0)
+		if (chr->range <= i && chr->range >= 0)
 		{
 			i = chr->range;
 			str = chr->name;

@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:16:32 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/21 18:05:51 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/22 11:23:02 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,7 +42,10 @@ int					create_link(char *str, t_room *first)
 	tab = ft_strsplit(str, '-');
 //	ft_printf("test01\n");
 	if (!ft_strcmp(tab[0], tab[1]))
+	{
+		ft_freetab(tab);
 		return (0);
+	}
 	dest = first;
 	src = first;
 	while (dest)
@@ -58,7 +61,10 @@ int					create_link(char *str, t_room *first)
 		src = src->next;
 	}
 	if (!src || !dest)
+	{
+		ft_freetab(tab);
 		return (0);
+	}
 	else
 	{
 		new1->links = dest->links;
@@ -68,6 +74,7 @@ int					create_link(char *str, t_room *first)
 		new2->room = dest->name;
 		src->links = new2;
 	}
+	ft_freetab(tab);
 	return (1);
 }
 
@@ -86,10 +93,19 @@ int					tubes(char *str, t_room *first)
 		if (buff[0] == '#')
 			;
 		else if (ft_tablen(tab) != 2)
+		{
+			free(buff);
+			ft_freetab(tab);
 			return (0);
+		}
 		else if (!(create_link(buff, first)))
+		{
+			free(buff);
+			ft_freetab(tab);
 			return (0);
-		free(tab);
+		}
+		ft_freetab(tab);
+		free(buff);
 	}
 	return (1);
 }
@@ -102,7 +118,7 @@ t_room			*create_nest(char **tab, t_room *first, int *stat, int ant)
 	new = (t_room *)malloc(sizeof(t_room));
 	new->name = ft_strdup(tab[0]);
 	new->x = ft_atoi(tab[1]);
-	new->y = ft_atoi(tab[1]);
+	new->y = ft_atoi(tab[2]);
 	new->range = (*stat == -2 || *stat == -3 ? 0 : -1);
 	new->nbr = ant * (*stat == -1 || *stat == -4);
 	new->links = NULL;
@@ -130,25 +146,26 @@ int				valid_nest(char **tab, t_room *first)
 	i = 0;
 	while (tab[0][i])
 	{
-		if (!ft_isprint(tab[0][i++]))
+		if (!ft_isprint(tab[0][i]))
 			return (0);
+		i++;
 	}
-	free(tab);
 	while (cpy)
 	{
 		if ((!ft_strcmp(cpy->name, tab[0])) || (cpy->x == ft_atoi(tab[1]) && cpy->y == ft_atoi(tab[2]) && ft_strcmp(cpy->name, tab[0])))
 			return (0);
 		cpy = cpy->next;
 	}
-	while (tab[j] && (!(i = 0)))
+	while (j < 3 && (!(i = 0)))
 	{
 		t = ft_atoi(tab[j]);
 		if (t < 0 || t > INT_MAX)
 			return (0);
 		while (tab[j][i])
 		{
-			if (!ft_isdigit(tab[j][i++]))
+			if (!ft_isdigit(tab[j][i]))
 				return (0);
+			i++;
 		}
 		j++;
 	}
@@ -165,44 +182,71 @@ t_room			*rooms(t_room *first, int ant)
 	stat = 0;
 	while ((nbr = get_next_line(0, &str)))
 	{
+		tab = ft_strsplit(str, '-');
 //		ft_printf("test01\nstat :%d\n", stat);
 		if (!ft_strcmp(str, "##start"))
 		{
 //			ft_printf("test02\nstat :%d\n", stat);
-			if (stat % 2 == 1 || stat < 0)
+			ft_freetab(tab);
+			if ((stat % 2 == 1 || stat < 0))
+			{
+				free(str);
 				return (NULL);
+			}
 			stat = (!stat ? -1 : -4);
 		}
 		else if (!ft_strcmp(str, "##end"))
 		{
 //			ft_printf("test03\nstat :%d\n", stat);
+			ft_freetab(tab);
 			if (stat > 1 || stat < 0)
+			{
+				free(str);
 				return (NULL);
+			}
 			stat = (!stat ? -2 : -3);
 		}
 		else if (str[0] == '#')
 		{
 //			ft_printf("test04\n");
+			ft_freetab(tab);
 			if (stat < 0)
+			{
+				free(str);
 				return (NULL);
+			}
 		}
-		else if (ft_tablen(ft_strsplit(str, '-')) == 2)
+		else if (ft_tablen(tab) == 2)
 		{
 //			ft_printf("test05\n");
 			if (stat < 3 || !(tubes(str, first)))
+			{
+				ft_freetab(tab);
+				free(str);
 				return (NULL);
+			}
+			ft_freetab(tab);
+			free(str);
 			return (stat >= 3 ? first : NULL);
 		}
 		else if (str[0] == 'L')
+		{
+			ft_freetab(tab);
+			free(str);
 			return (NULL);
+		}
 		else
 		{
 //			ft_printf("test06\n");
+			ft_freetab(tab);
 			tab = ft_strsplit(str, ' ');
 			if (ft_tablen(tab) != 3 || !valid_nest(tab, first))
+			{
+				free(str);
 				return (NULL);
+			}
 			first = create_nest(tab, first, &stat, ant);
-			free(tab);
+			ft_freetab(tab);
 		}
 //		ft_printf("test07\n");
 		free(str);
@@ -222,11 +266,17 @@ t_room			*parse(t_room *room)
 	while ((nbr = get_next_line(0, &str)))
 	{
 		if (!ft_strcmp(str, "##start") || !ft_strcmp(str, "##end"))
+		{
+			free(str);
 			return (NULL);
+		}
 		else if (str[0] == '#')
 			;
 		else if (!ft_isdigit(str[0]))
+		{
+			free(str);
 			return (NULL);
+		}
 		else
 		{
 			ant = ft_atoi(str);
