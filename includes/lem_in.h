@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:08:35 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/21 18:05:49 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 14:01:09 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -47,9 +47,14 @@ typedef struct		s_room
 
 int					put_len(t_room *init, t_room *end, int *st);
 int					remove_access_s(t_room *init);
+int					remove_all(t_room *room, char *str, int i);
+int					tubes(char *str, t_room *first);
 t_room				*find_room(t_room *init, char *str);
 t_room				*parse(t_room *room);
+t_room				*roomchr(t_room *init, char *str);
 void				moove_ants(t_room *init, t_room *start, t_ant *ant);
 void				*print_error(void);
+void				free_all(t_room *room);
+void				*ft_freetabuff(char **tab, char *buff, t_room *room);
 
 #endif

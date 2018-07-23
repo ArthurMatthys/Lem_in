@@ -6,14 +6,14 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/19 08:44:48 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/22 09:38:19 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 09:39:42 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int				remove_all(t_room *room, char *str)
+int				remove_all(t_room *room, char *str, int i)
 {
 	t_links		*link;
 	t_links		*to_del;
@@ -25,23 +25,27 @@ int				remove_all(t_room *room, char *str)
 		link = link->links;
 		free(to_del);
 	}
-	if (room->stat == 2)
+	room->links = NULL;
+	if (room->stat == 2 && i)
 	{
 		room->links = NULL;
 		return (1);
 	}
-	to_del = (t_links *)malloc(sizeof(t_links));
-	to_del->links = NULL;
-	to_del->room = str;
-	room->links = to_del;
+	if (i)
+	{
+		to_del = (t_links *)malloc(sizeof(t_links));
+		to_del->links = NULL;
+		to_del->room = str;
+		room->links = to_del;
+	}
 	return (1);
 }
 
-int		remove_access(t_room *init, t_room *room)
+int				remove_access(t_room *init, t_room *room)
 {
 	t_links		*link;
-	t_room		*chr = NULL;
-	char		*str = NULL;
+	t_room		*chr;
+	char		*str;
 	int			i;
 
 	link = room->links;
@@ -59,12 +63,12 @@ int		remove_access(t_room *init, t_room *room)
 		}
 		link = link->links;
 	}
-	return (remove_all(room, str));
+	return (remove_all(room, str, 1));
 }
 
-int		remove_access_s(t_room *init)
+int				remove_access_s(t_room *init)
 {
-	t_room	*cpy;
+	t_room		*cpy;
 
 	cpy = init;
 	while (cpy)

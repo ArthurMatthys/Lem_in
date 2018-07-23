@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:27:56 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/22 10:57:37 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 11:46:45 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,64 +48,55 @@ void		free_all(t_room *init)
 
 	while (init)
 	{
-		cpy = init->next;
-		free(init->links);
-		free(init->name);
-		free(init);
-		init = cpy;
+		cpy = init;
+		init = init->next;
+		free(cpy->links);
+		free(cpy->name);
+		free(cpy);
 	}
 }
 
+int			inner_main(t_room *init, t_room *end, t_room *start)
+{
+	t_ant	*ant;
+	int		a;
+
+	a = 0;
+	if (!put_len(init, end, &a))
+	{
+		free_all(init);
+		ft_printf("Error\n");
+		return (0);
+	}
+	ant = create_ant(start->nbr, start);
+	remove_access_s(init);
+	moove_ants(init, start, ant);
+	free_all(init);
+	free(ant);
+	return (0);
+}
 
 int			main(void)
 {
 	t_room	*start;
 	t_room	*end;
-	t_room	*init = NULL;
-	t_ant	*ant;
-	int		a;
-//	t_links	*link;
+	t_room	*init;
 
-	a = 0;
-//	ft_printf("test01\n");
+	init = NULL;
 	if (!(init = parse(init)))
 	{
 		free_fd();
 		ft_printf("Error\n");
+		free_all(init);
 		return (0);
 	}
-//	ft_printf("test02\n");
 	free_fd();
-	start = init;
-//	while (start)
-//	{
-//		ft_printf("%s : stats : %d ; nbr : %d\n", start->name, start->stat, start->nbr);
-//		link = start->links;
-//		while (link)
-//		{
-//			ft_printf("%s to %s\n", start->name, link->room);
-//			link = link->links;
-//		}
-//		start = start->next;
-//	}
-	if (!(start = find_stat(init, 1)) || !(end = find_stat(init, 2)))
+	start = find_stat(init, 1);
+	if (!start || !(end = find_stat(init, 2)))
 	{
-		ft_printf("yoooo\n");
-		return (0);
-	}
-//	ft_printf("%d\n", a);
-	if (!put_len(init, end, &a))
-	{
+		free_all(init);
 		ft_printf("Error\n");
 		return (0);
 	}
-//	ft_printf("test04\n");
-	ant = create_ant(start->nbr, start);
-//	ft_printf("test05\n");
-	remove_access_s(init);
-//	ft_printf("start->nbr : %d\n", start->nbr);
-	moove_ants(init, start, ant);
-	free_all(init);
-	free(ant);
-	return (0);
+	return (inner_main(init, end, start));
 }

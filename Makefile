@@ -6,7 +6,7 @@
 #    By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/07/18 10:17:52 by amatthys     #+#   ##    ##    #+#        #
-#    Updated: 2018/07/22 10:16:06 by amatthys    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/23 14:00:12 by amatthys    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -14,7 +14,8 @@
 RELATIVE = .
 
 SRC_PATH = src
-SRC_NAME = print_error.c put_len.c main.c parse.c remove_access.c movement.c
+SRC_NAME = put_len.c main.c parse.c remove_access.c movement.c \
+		   tubes.c
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
 
@@ -29,7 +30,7 @@ CFLAGS = -g -Wall -Werror -Wextra
 CPPFLAGS = -I $(INCLUDES_PATH)
 INC_LIB = -I ft_printf/includes/ -I ft_printf/libft/includes/
 
-.PHONY: clean fclean all re
+.PHONY: clean fclean all re LIB
 
 all : $(NAME)
 
