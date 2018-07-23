@@ -6,7 +6,7 @@
 #    By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/07/18 10:17:52 by amatthys     #+#   ##    ##    #+#        #
-#    Updated: 2018/07/23 14:00:12 by amatthys    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/23 17:22:13 by amatthys    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -15,7 +15,7 @@ RELATIVE = .
 
 SRC_PATH = src
 SRC_NAME = put_len.c main.c parse.c remove_access.c movement.c \
-		   tubes.c
+		   tubes.c get_ant.c
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
 

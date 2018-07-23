@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:08:35 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 14:14:36 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 17:22:02 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -52,9 +52,10 @@ int					tubes(char *str, t_room *first);
 t_room				*find_room(t_room *init, char *str);
 t_room				*parse(t_room *room);
 t_room				*roomchr(t_room *init, char *str);
+t_room				*rooms(t_room *room, int ant, int stat, char *str);
 void				moove_ants(t_room *init, t_room *start, t_ant *ant);
 void				*print_error(void);
 void				free_all(t_room *room);
-void				*ft_freetabuff(char **tab, char *buff, t_room *room);
+void				*ft_tabuff(char **tab, char *buff, t_room *room);
 
 #endif

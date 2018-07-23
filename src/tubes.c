@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 13:56:28 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 15:28:45 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 16:32:49 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,7 +62,7 @@ int				create_link(char *str, t_room *first)
 	}
 }
 
-void			*ft_freetabuff(char **tab, char *buff, t_room *room)
+void			*ft_tabuff(char **tab, char *buff, t_room *room)
 {
 	t_room		*cpy;
 	t_room		*to_del;
@@ -95,7 +95,7 @@ int				tubes(char *str, t_room *first)
 
 	if (!create_link(str, first))
 	{
-		ft_freetabuff(NULL, NULL, first);
+		ft_tabuff(NULL, str, first);
 		return (0);
 	}
 	while ((nbr = get_next_line(0, &buff)))
@@ -104,10 +104,10 @@ int				tubes(char *str, t_room *first)
 		if (buff[0] == '#')
 			;
 		else if (ft_tablen(tab) != 2)
-			return (ft_freetabuff(tab, buff, first) ? 0 : 0);
+			return (ft_tabuff(tab, buff, first) ? 0 : 0);
 		else if (!(create_link(buff, first)))
-			return (ft_freetabuff(tab, buff, first) ? 0 : 0);
-		ft_freetabuff(tab, buff, NULL);
+			return (ft_tabuff(tab, buff, first) ? 0 : 0);
+		free(buff);
 	}
 	return (1);
 }

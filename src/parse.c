@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:16:32 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 15:59:47 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 17:35:42 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -105,87 +105,31 @@ int				inner_room(char *str, int *stat)
 	return (1);
 }
 
-t_room			*rooms(t_room *first, int ant)
+t_room			*rooms(t_room *first, int ant, int stat, char *str)
 {
-	int			stat;
-	int			nbr;
-	char		*str;
 	char		**tab;
 
-	stat = 0;
-	while ((nbr = get_next_line(0, &str)))
+	while (get_next_line(0, &str))
 	{
 		tab = ft_strsplit(str, '-');
 		if (inner_room(str, &stat) == 2)
 			;
+		else if (str[0] == '#' && stat < 0)
+			return (ft_tabuff(tab, str, first));
 		else if (str[0] == '#')
-		{
-			if (stat < 0)
-				return (ft_freetabuff(tab, str, first));
-		}
+			;
 		else if (ft_tablen(tab) == 2)
 		{
 			if (stat < 3 || !(tubes(str, first)))
-				return (ft_freetabuff(tab, str, first));
-			ft_freetabuff(tab, str, NULL);
-			return (stat >= 3 ? first : NULL);
+				return (ft_tabuff(tab, str, NULL));
+			return (!ft_tabuff(tab, str, NULL) && stat >= 3 ? first : NULL);
 		}
-		else if (!ft_freetabuff(tab, NULL, NULL) && (tab = ft_strsplit(str, ' ')))
-		{
-			if (ft_tablen(tab) != 3 || !valid_nest(tab, first))
-				return (ft_freetabuff(tab, str, first));
+		else if (!ft_tabuff(tab, NULL, NULL) && (tab = ft_strsplit(str, ' ')) &&
+				(ft_tablen(tab) != 3 || !valid_nest(tab, first)))
+			return (ft_tabuff(tab, str, first));
+		else
 			first = create_nest(tab, first, &stat, ant);
-		}
-		ft_freetabuff(tab, str, NULL);
+		ft_tabuff(tab, str, NULL);
 	}
 	return (stat >= 3 ? first : NULL);
-}
-
-int				inside_loop(char *str, long long *ant)
-{
-	int			i;
-
-	i = 0;
-	if (!ft_strcmp(str, "##start") || !ft_strcmp(str, "##end"))
-		return (0);
-	else if (str[0] == '#')
-		;
-	else if (!ft_isdigit(str[0]))
-		return (0);
-	else
-	{
-		*ant = ft_atoi(str);
-		while (str[i])
-			if (!ft_isdigit(str[i++]))
-				return (0);
-		return (1);
-	}
-	return (1);
-}
-
-t_room			*parse(t_room *room)
-{
-	char		*str;
-	long long	ant;
-	int			nbr;
-	int			i;
-
-	ant = 0;
-	i = 0;
-	while ((nbr = get_next_line(0, &str)))
-	{
-		if (!inside_loop(str, &ant))
-		{
-			free(str);
-			return (NULL);
-		}
-		else if (ant)
-		{
-			free(str);
-			break ;
-		}
-		free(str);
-	}
-	return (ant > 0 && ant <= INT_MAX && nbr ?
-			rooms(room, (int)ant) : NULL);
 }
