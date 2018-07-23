@@ -6,12 +6,26 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/19 15:37:35 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 10:29:38 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 14:44:59 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+t_room		*roomchr(t_room *init, char *str)
+{
+	t_room	*cpy;
+
+	cpy = init;
+	while (cpy)
+	{
+		if (!ft_strcmp(cpy->name, str))
+			break ;
+		cpy = cpy->next;
+	}
+	return (cpy);
+}
 
 void		moove_room(int i, t_ant *ant, t_room *next, int *count)
 {

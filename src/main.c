@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:27:56 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 11:46:45 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 15:17:05 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -87,7 +87,8 @@ int			main(void)
 	{
 		free_fd();
 		ft_printf("Error\n");
-		free_all(init);
+		if (init)
+			free_all(init);
 		return (0);
 	}
 	free_fd();

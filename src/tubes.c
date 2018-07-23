@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 13:56:28 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 14:02:20 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 15:28:45 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,6 +69,7 @@ void			*ft_freetabuff(char **tab, char *buff, t_room *room)
 
 	if (buff)
 		free(buff);
+	buff = NULL;
 	if (tab)
 		ft_freetab(tab);
 	tab = NULL;
@@ -81,6 +82,7 @@ void			*ft_freetabuff(char **tab, char *buff, t_room *room)
 		free(to_del->name);
 		to_del->name = NULL;
 		free(to_del);
+		to_del = NULL;
 	}
 	return (NULL);
 }

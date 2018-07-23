@@ -6,26 +6,12 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:16:32 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 14:01:37 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 15:59:47 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-t_room			*roomchr(t_room *init, char *str)
-{
-	t_room		*cpy;
-
-	cpy = init;
-	while (cpy)
-	{
-		if (!ft_strcmp(cpy->name, str))
-			break ;
-		cpy = cpy->next;
-	}
-	return (cpy);
-}
 
 t_room			*create_nest(char **tab, t_room *first, int *stat, int ant)
 {
@@ -98,36 +84,26 @@ int				valid_nest(char **tab, t_room *first)
 	return (tab[0][0] == 'L' ? 0 : 1);
 }
 
-int				inner_room(char *str, char **tab, t_room *first, int *stat)
+int				inner_room(char *str, int *stat)
 {
 	if (!ft_strcmp(str, "##start"))
 	{
 		if ((*stat % 2 == 1 || *stat < 0))
-		{
-			ft_freetabuff(tab, str, first);
 			return (0);
-		}
 		*stat = (!(*stat) ? -1 : -4);
 		return (2);
 	}
 	else if (!ft_strcmp(str, "##end"))
 	{
-		if (*stat > 1 || *stat < 0)
-		{
-			ft_freetabuff(tab, str, first);
+		if (*stat > 2 || *stat < 0)
 			return (0);
-		}
 		*stat = (!(*stat) ? -2 : -3);
 		return (2);
 	}
 	else if (str[0] == 'L')
-	{
-		ft_freetabuff(tab, str, first);
 		return (0);
-	}
 	return (1);
 }
-
 
 t_room			*rooms(t_room *first, int ant)
 {
@@ -140,28 +116,9 @@ t_room			*rooms(t_room *first, int ant)
 	while ((nbr = get_next_line(0, &str)))
 	{
 		tab = ft_strsplit(str, '-');
-		if (inner_room(str, tab, first, &stat) == 2)
+		if (inner_room(str, &stat) == 2)
 			;
-		else if (!tab)
-			return (NULL);
-/*		if (!ft_strcmp(str, "##start"))
-		{
-			if ((stat % 2 == 1 || stat < 0))
-				return (ft_freetabuff(tab, str, first));
-			stat = (!stat ? -1 : -4);
-		}
-		else if (!ft_strcmp(str, "##end"))
-		{
-			if (stat > 1 || stat < 0)
-				return (ft_freetabuff(tab, str, first));
-			stat = (!stat ? -2 : -3);
-		}
-		else if (str[0] == 'L')
-		{
-			ft_freetabuff(tab, str, first);
-			return (0);
-		}
-*/		else if (str[0] == '#')
+		else if (str[0] == '#')
 		{
 			if (stat < 0)
 				return (ft_freetabuff(tab, str, first));
@@ -173,10 +130,8 @@ t_room			*rooms(t_room *first, int ant)
 			ft_freetabuff(tab, str, NULL);
 			return (stat >= 3 ? first : NULL);
 		}
-		else
+		else if (!ft_freetabuff(tab, NULL, NULL) && (tab = ft_strsplit(str, ' ')))
 		{
-			ft_freetabuff(tab, NULL, NULL);
-			tab = ft_strsplit(str, ' ');
 			if (ft_tablen(tab) != 3 || !valid_nest(tab, first))
 				return (ft_freetabuff(tab, str, first));
 			first = create_nest(tab, first, &stat, ant);
