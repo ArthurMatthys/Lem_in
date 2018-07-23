@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:27:56 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 15:17:05 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 18:31:44 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -64,7 +64,7 @@ int			inner_main(t_room *init, t_room *end, t_room *start)
 	a = 0;
 	if (!put_len(init, end, &a))
 	{
-		free_all(init);
+		ft_tabuff(NULL, NULL, init);
 		ft_printf("Error\n");
 		return (0);
 	}
@@ -87,15 +87,12 @@ int			main(void)
 	{
 		free_fd();
 		ft_printf("Error\n");
-		if (init)
-			free_all(init);
 		return (0);
 	}
 	free_fd();
 	start = find_stat(init, 1);
 	if (!start || !(end = find_stat(init, 2)))
 	{
-		free_all(init);
 		ft_printf("Error\n");
 		return (0);
 	}

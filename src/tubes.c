@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 13:56:28 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 16:32:49 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/23 18:44:51 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -94,20 +94,17 @@ int				tubes(char *str, t_room *first)
 	char		**tab;
 
 	if (!create_link(str, first))
-	{
-		ft_tabuff(NULL, str, first);
 		return (0);
-	}
 	while ((nbr = get_next_line(0, &buff)))
 	{
 		tab = ft_strsplit(buff, '-');
 		if (buff[0] == '#')
 			;
 		else if (ft_tablen(tab) != 2)
-			return (ft_tabuff(tab, buff, first) ? 0 : 0);
+			return (ft_tabuff(tab, buff, NULL) ? 0 : 0);
 		else if (!(create_link(buff, first)))
 			return (ft_tabuff(tab, buff, first) ? 0 : 0);
-		free(buff);
+		ft_tabuff(tab, buff, NULL);
 	}
 	return (1);
 }
