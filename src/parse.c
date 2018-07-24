@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:16:32 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 19:23:09 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/24 10:34:33 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -88,7 +88,7 @@ int				inner_room(char *b, int *s)
 {
 	if (!ft_strcmp(b, "##start"))
 	{
-		if ((*s > 2|| *s < 0))
+		if ((*s > 2 || *s < 0))
 			return (0);
 		*s = (!(*s) ? -1 : -4);
 		return (2);
@@ -109,14 +109,15 @@ t_room			*rooms(t_room *first, int ant, int s, char *b)
 {
 	char		**tab;
 
-	while (get_next_line(0, &b))
+	while (get_next_line(0, &b) && (tab = ft_strsplit(b, '-')))
 	{
-		tab = ft_strsplit(b, '-');
-		if (inner_room(b, &s) == 2);
-		else if ((b[0] == '#' && s < 0) || (s > 3 && !ft_strcmp(b, "##start"))
+		if (inner_room(b, &s) == 2)
+			;
+		else if ((b[0] == '#' && s < 0) || (s > 2 && !ft_strcmp(b, "##start"))
 				|| (s > 2 && !ft_strcmp(b, "##end")))
 			return (ft_tabuff(tab, b, first));
-		else if (b[0] == '#');
+		else if (b[0] == '#')
+			;
 		else if (ft_tablen(tab) == 2)
 		{
 			if (s < 3 || !(tubes(b, first)))
