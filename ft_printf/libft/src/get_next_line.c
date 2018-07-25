@@ -6,13 +6,14 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/13 12:26:30 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/22 13:10:35 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/25 09:56:55 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include "libft.h"
+#include <stdio.h>
 
 static t_fd		*find_fd(int fd, t_fd **list)
 {
@@ -44,7 +45,7 @@ static int		find_str(t_fd *curr, char **tab)
 	char	*tmp;
 
 	if (!(residual = ft_strchr(curr->str, '\n')))
-		return (-1);
+		return (0);
 	len = ft_strlen(++residual);
 	if (!(to_print = ft_strnew(ft_strlen(curr->str) - len)))
 		return (-1);
@@ -56,10 +57,12 @@ static int		find_str(t_fd *curr, char **tab)
 	return (1);
 }
 
-static int		end_of_file(t_fd *curr)
+static int		end_of_file(t_fd *curr, char **tab)
 {
+	*tab = ft_strdup(curr->str);
 	if (ft_strlen(curr->str))
 	{
+		free(curr->str);
 		curr->str = ft_strnew(0);
 		return (1);
 	}
@@ -93,7 +96,7 @@ int				get_next_line(const int fd, char **tab)
 		if ((count = read(fd, buff, BUFF_SIZE)) == -1)
 			return (-1);
 		if (count == 0)
-			return (end_of_file(curr));
+			return (end_of_file(curr, tab));
 		buff[count] = '\0';
 		temp = curr->str;
 		curr->str = ft_strjoin(curr->str, buff);

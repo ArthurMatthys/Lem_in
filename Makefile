@@ -6,7 +6,7 @@
 #    By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/07/18 10:17:52 by amatthys     #+#   ##    ##    #+#        #
-#    Updated: 2018/07/23 17:22:13 by amatthys    ###    #+. /#+    ###.fr      #
+#    Updated: 2018/07/24 11:09:58 by amatthys    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -28,20 +28,20 @@ NAME = lem-in
 CC = gcc
 CFLAGS = -g -Wall -Werror -Wextra
 CPPFLAGS = -I $(INCLUDES_PATH)
-INC_LIB = -I ft_printf/includes/ -I ft_printf/libft/includes/
+INC_lib = -I ft_printf/includes/ -I ft_printf/libft/includes/
 
-.PHONY: clean fclean all re LIB
+.PHONY: clean fclean all re lib
 
 all : $(NAME)
 
-LIB :
+lib :
 		make -C ft_printf/
 
-$(NAME) : $(OBJ) LIB
-		$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L./ft_printf -lftprintf $(INC_LIB)
+$(NAME) : $(OBJ) lib
+		$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L./ft_printf -lftprintf $(INC_lib)
 
-%.o: %.c
-		$(CC) $(CFLAGS) $(CPPFLAGS) $(INC_LIB) -o $@ -c $<
+%.o: %.c includes/lem_in.h
+		$(CC) $(CFLAGS) $(CPPFLAGS) $(INC_lib) -o $@ -c $<
 
 clean:
 		rm -rf $(OBJ)
