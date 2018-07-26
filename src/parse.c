@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:16:32 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/25 08:43:44 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/26 11:31:02 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -102,25 +102,27 @@ int				inner_room(char *b, int *s)
 	}
 	else if (b[0] == 'L')
 		return (0);
+	if (b[0] == '#' && ft_strcmp(b, "##end") && ft_strcmp(b, "##start"))
+		return (2);
 	return (1);
 }
 
-t_room			*rooms(t_room *first, int ant, int s, char *b)
+t_room			*rooms(t_room *first, int ant, char **to, char *b)
 {
 	char		**tab;
+	int			s;
 
-	while (get_next_line(0, &b) && (tab = ft_strsplit(b, '-')))
+	s = 0;
+	while (get_next_line(0, &b) && reall(b, to) && (tab = ft_strsplit(b, '-')))
 	{
 		if (inner_room(b, &s) == 2)
 			;
-		else if ((b[0] == '#' && s < 0) || (s > 2 && !ft_strcmp(b, "##start"))
-				|| (s > 2 && !ft_strcmp(b, "##end")))
+		else if ((b[0] == '#' && s < 0) || (s > 2 && !ft_strcmp(b, "##end"))
+				|| (s > 2 && !ft_strcmp(b, "##start")))
 			return (ft_tabuff(tab, b, first));
-		else if (b[0] == '#')
-			;
 		else if (ft_tablen(tab) == 2)
 		{
-			if (s < 3 || !(tubes(b, first)))
+			if (s < 3 || !(tubes(b, to, first)))
 				return (ft_tabuff(tab, b, first));
 			return (!ft_tabuff(tab, b, NULL) && s >= 3 ? first : NULL);
 		}

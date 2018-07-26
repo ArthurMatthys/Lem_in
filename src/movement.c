@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/19 15:37:35 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 14:44:59 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/26 10:57:11 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -36,7 +36,8 @@ void		moove_room(int i, t_ant *ant, t_room *next, int *count)
 	ft_printf("L%d-%s", i + 1, next->name);
 	if (next->stat == 2)
 	{
-		ft_printf(" ");
+		if (i == *count)
+			ft_printf(" ");
 		*count += 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:08:35 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/23 17:22:02 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/26 11:23:20 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,14 +45,15 @@ typedef struct		s_room
 	struct s_room	*next;
 }					t_room;
 
+int					reall(char *str, char **to);
 int					put_len(t_room *init, t_room *end, int *st);
 int					remove_access_s(t_room *init);
 int					remove_all(t_room *room, char *str, int i);
-int					tubes(char *str, t_room *first);
+int					tubes(char *str, char **to, t_room *first);
 t_room				*find_room(t_room *init, char *str);
-t_room				*parse(t_room *room);
+t_room				*parse(t_room *room, char **to);
 t_room				*roomchr(t_room *init, char *str);
-t_room				*rooms(t_room *room, int ant, int stat, char *str);
+t_room				*rooms(t_room *room, int t, char **to, char *str);
 void				moove_ants(t_room *init, t_room *start, t_ant *ant);
 void				*print_error(void);
 void				free_all(t_room *room);

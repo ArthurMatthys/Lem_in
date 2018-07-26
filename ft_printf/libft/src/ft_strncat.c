@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/24 13:33:22 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2017/11/24 13:33:25 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/25 14:10:12 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,10 @@ char	*ft_strncat(char *dest, const char *src, size_t n)
 	size_t c;
 
 	c = 0;
-	i = ft_strlen(dest);
+	if (dest)
+		i = ft_strlen(dest);
+	else
+		i = 0;
 	while (src[c] != '\0' && c < n)
 	{
 		dest[i + c] = src[c];

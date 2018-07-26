@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 13:56:28 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/25 09:48:36 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/25 12:01:54 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -87,7 +87,7 @@ void			*ft_tabuff(char **tab, char *buff, t_room *room)
 	return (NULL);
 }
 
-int				tubes(char *str, t_room *first)
+int				tubes(char *str, char **to, t_room *first)
 {
 	char		*buff;
 	char		**tab;
@@ -97,6 +97,7 @@ int				tubes(char *str, t_room *first)
 		return (0);
 	while (get_next_line(0, &buff))
 	{
+		reall(buff, to);
 		tab = ft_strsplit(buff, '-');
 		if (!ft_strcmp(buff, "##end") || !ft_strcmp(buff, "##start"))
 			return (ft_tabuff(tab, buff, NULL) ? 0 : 0);
@@ -108,6 +109,7 @@ int				tubes(char *str, t_room *first)
 			return (ft_tabuff(tab, buff, NULL) ? 0 : 0);
 		ft_tabuff(tab, buff, NULL);
 	}
+	reall(buff, to);
 	ft_tabuff(NULL, buff, NULL);
 	return (1);
 }

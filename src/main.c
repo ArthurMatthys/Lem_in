@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:27:56 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/25 09:54:52 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/25 16:54:33 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -56,7 +56,7 @@ void		free_all(t_room *init)
 	}
 }
 
-int			inner_main(t_room *init, t_room *end, t_room *start)
+int			inner_main(t_room *init, t_room *end, t_room *start, char *to)
 {
 	t_ant	*ant;
 	int		a;
@@ -70,6 +70,8 @@ int			inner_main(t_room *init, t_room *end, t_room *start)
 	}
 	ant = create_ant(start->nbr, start);
 	remove_access_s(init);
+	ft_printf("%s\n", to);
+	free(to);
 	moove_ants(init, start, ant);
 	free_all(init);
 	free(ant);
@@ -81,9 +83,11 @@ int			main(void)
 	t_room	*start;
 	t_room	*end;
 	t_room	*init;
+	char	*to;
 
 	init = NULL;
-	if (!(init = parse(init)))
+	to = NULL;
+	if (!(init = parse(init, &to)))
 	{
 		free_fd();
 		ft_printf("Error\n");
@@ -96,5 +100,5 @@ int			main(void)
 		ft_printf("Error\n");
 		return (0);
 	}
-	return (inner_main(init, end, start));
+	return (inner_main(init, end, start, to));
 }
