@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/19 15:37:35 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/26 10:57:11 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/26 12:14:58 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,14 +29,19 @@ t_room		*roomchr(t_room *init, char *str)
 
 void		moove_room(int i, t_ant *ant, t_room *next, int *count)
 {
+	int j;
+
+	j = 0;
+	while (ant[i + j].nbr != -2)
+		j++;
 	ant[i].room = next->name;
-	next->nbr = -1;
+	next->nbr = (next->stat == 2 ? 0 : -1);
 	if (i != *count)
 		ft_printf(" ");
 	ft_printf("L%d-%s", i + 1, next->name);
 	if (next->stat == 2)
 	{
-		if (i == *count)
+		if (j > 1)
 			ft_printf(" ");
 		*count += 1;
 	}
