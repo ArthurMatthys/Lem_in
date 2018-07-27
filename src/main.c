@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:27:56 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/26 11:43:56 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/26 15:33:00 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,7 +31,8 @@ t_ant		*create_ant(int nbr, t_room *start)
 {
 	t_ant	*tab;
 
-	tab = (t_ant *)malloc(sizeof(t_ant) * (nbr + 1));
+	if (!(tab = (t_ant *)malloc(sizeof(t_ant) * ((long)nbr + 1))))
+		return (NULL);
 	tab[nbr].room = NULL;
 	tab[nbr].nbr = -2;
 	while (--nbr >= 0)
@@ -66,10 +67,16 @@ int			inner_main(t_room *init, t_room *end, t_room *start, char *to)
 	{
 		free(to);
 		ft_tabuff(NULL, NULL, init);
-		ft_printf("Error\n");
+		ft_printf("Error : can t go to the end\n");
 		return (0);
 	}
-	ant = create_ant(start->nbr, start);
+	if (!(ant = create_ant(start->nbr, start)))
+	{
+		ft_tabuff(NULL, to, init);
+		free(ant);
+		ft_printf("Error : Could not allocate memory\n");
+		return (0);
+	}
 	remove_access_s(init);
 	ft_printf("%s\n", to);
 	free(to);
@@ -92,7 +99,7 @@ int			main(void)
 	{
 		free_fd();
 		free(to);
-		ft_printf("Error\n");
+		ft_printf("Error : unvalid entry\n");
 		return (0);
 	}
 	free_fd();
@@ -100,7 +107,7 @@ int			main(void)
 	if (!start || !(end = find_stat(init, 2)))
 	{
 		free(to);
-		ft_printf("Error\n");
+		ft_printf("Error : no start or no end\n");
 		return (0);
 	}
 	return (inner_main(init, end, start, to));

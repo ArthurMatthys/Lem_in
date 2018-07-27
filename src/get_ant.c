@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/23 17:20:43 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/26 11:23:34 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/26 15:59:18 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,11 +69,10 @@ t_room			*parse(t_room *room, char **to)
 	char		*str;
 	long long	ant;
 	int			nbr;
-	int			i;
 
 	ant = 0;
-	i = 0;
-	while ((nbr = get_next_line(0, &str)) && reall(str, to))
+	str = NULL;
+	while ((nbr = get_next_line(0, &str)) && (nbr != -1) && reall(str, to))
 	{
 		if (!inside_loop(str, &ant))
 		{
@@ -83,10 +82,12 @@ t_room			*parse(t_room *room, char **to)
 		else if (ant)
 		{
 			free(str);
+			str = NULL;
 			break ;
 		}
 		free(str);
 	}
+	free(str);
 	return (ant > 0 && ant <= INT_MAX && nbr ?
-			rooms(room, (int)ant, to, str) : NULL);
+			rooms(room, ant, to, str) : NULL);
 }

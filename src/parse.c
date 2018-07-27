@@ -6,7 +6,7 @@
 /*   By: amatthys <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/07/12 11:16:32 by amatthys     #+#   ##    ##    #+#       */
-/*   Updated: 2018/07/26 11:31:02 by amatthys    ###    #+. /#+    ###.fr     */
+/*   Updated: 2018/07/26 15:58:10 by amatthys    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -102,7 +102,8 @@ int				inner_room(char *b, int *s)
 	}
 	else if (b[0] == 'L')
 		return (0);
-	if (b[0] == '#' && ft_strcmp(b, "##end") && ft_strcmp(b, "##start"))
+	else if ((b[0] == '#' && *s >= 0) && (ft_strcmp(b, "##end")) &&
+			(ft_strcmp(b, "##start")))
 		return (2);
 	return (1);
 }
@@ -133,5 +134,5 @@ t_room			*rooms(t_room *first, int ant, char **to, char *b)
 			first = create_nest(tab, first, &s, ant);
 		ft_tabuff(tab, b, NULL);
 	}
-	return (s >= 3 ? first : NULL);
+	return (s >= 3 && !ft_tabuff(NULL, b, NULL) ? first : NULL);
 }
