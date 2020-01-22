@@ -1,4 +1,4 @@
-# Lem_in-42
+# Lem_in
 Third project of the algorithm branch at school 42
 
 
